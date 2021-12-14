@@ -33,8 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List popular_movies = [];
   List upcoming_movies = [];
   List a =[];
-  String api = '4997aa3d5b054b5704cca6ea91622e6c';
-  String accesstoken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTk3YWEzZDViMDU0YjU3MDRjY2E2ZWE5MTYyMmU2YyIsInN1YiI6IjYxYjgxNDE3ZDE0NDQzMDA5MmNkMDAyNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ug8zyQ-OR9NbxinX1rYYfnjiniK9RXODeCuZdHOdo4o';
+  String api = ''; //api key
+  String accesstoken = ''; //accesstoken
   
 @override
 void initState() {
