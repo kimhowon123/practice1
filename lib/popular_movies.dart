@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice1/detail.dart';
 
 class PopularMovies extends StatefulWidget {
   final List popular;
@@ -6,10 +7,10 @@ class PopularMovies extends StatefulWidget {
   const PopularMovies({Key? key, required this.popular}) : super(key: key);
 
   @override
-  State<PopularMovies> createState() => PopularMoviesState();
+  State<PopularMovies> createState() => _PopularMoviesState();
 }
 
-class PopularMoviesState extends State<PopularMovies> {
+class _PopularMoviesState extends State<PopularMovies> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +27,14 @@ class PopularMoviesState extends State<PopularMovies> {
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Detail(name: widget.popular[index]['title'],
+                  bannerurl: 'https://image.tmdb.org/t/p/w500'+widget.popular[index]['backdrop_path'],
+                  posterurl: 'https://image.tmdb.org/t/p/w500'+widget.popular[index]['poster_path'],
+                  description: widget.popular[index]['overview'],
+                  vote: widget.popular[index]['vote_average'].toString(),
+                  launch_on: widget.popular[index]['release_date'],
+                  )
+                  ));
                 },
                 title: Row(
                   children: [
@@ -66,7 +74,6 @@ class PopularMoviesState extends State<PopularMovies> {
                                   color: Colors.yellow,
                                   size: 9,
                                 ),
-                            
                           ],
                         ),
                       ],),

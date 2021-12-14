@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practice1/detail.dart';
+import 'package:tmdb_api/tmdb_api.dart';
 
 class TopratedMovies extends StatefulWidget {
   final List toprated;
@@ -26,7 +28,14 @@ class TopratedMoviesState extends State<TopratedMovies> {
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Detail(name: widget.toprated[index]['title'],
+                  bannerurl: 'https://image.tmdb.org/t/p/w500'+widget.toprated[index]['backdrop_path'],
+                  posterurl: 'https://image.tmdb.org/t/p/w500'+widget.toprated[index]['poster_path'],
+                  description: widget.toprated[index]['overview'],
+                  vote: widget.toprated[index]['vote_average'].toString(),
+                  launch_on: widget.toprated[index]['release_date'],
+                  )
+                  ));
                 },
                 title: Row(
                   children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice1/detail.dart';
 
 class UpcomingMovies extends StatefulWidget {
   final List upcoming;
@@ -26,7 +27,14 @@ class UpcomingMoviesState extends State<UpcomingMovies> {
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Detail(name: widget.upcoming[index]['title'],
+                  bannerurl: 'https://image.tmdb.org/t/p/w500'+widget.upcoming[index]['backdrop_path'],
+                  posterurl: 'https://image.tmdb.org/t/p/w500'+widget.upcoming[index]['poster_path'],
+                  description: widget.upcoming[index]['overview'],
+                  vote: widget.upcoming[index]['vote_average'].toString(),
+                  launch_on: widget.upcoming[index]['release_date'], 
+                  )
+                  ));
                 },
                 title: Row(
                   children: [

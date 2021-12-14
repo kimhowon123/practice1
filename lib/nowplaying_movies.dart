@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb_api/tmdb_api.dart';
+import 'package:practice1/detail.dart';
 
 class NowPlayingMovies extends StatelessWidget {
   final List nowplaying;
@@ -20,9 +20,18 @@ class NowPlayingMovies extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Detail(name: nowplaying[index]['title'],
+                  bannerurl: 'https://image.tmdb.org/t/p/w500'+nowplaying[index]['backdrop_path'],
+                  posterurl: 'https://image.tmdb.org/t/p/w500'+nowplaying[index]['poster_path'],
+                  description: nowplaying[index]['overview'],
+                  vote: nowplaying[index]['vote_average'].toString(),
+                  launch_on: nowplaying[index]['release_date'], 
 
+                  )
+                  )
+                  );
                 },
-                child: Container(width: 140,
+                child: nowplaying[index]['title']!=null?Container(width: 140,
                 child: Column(
                   children: [
                     SizedBox(height: 20,), //글자와 포스터 사이 간격
@@ -72,7 +81,7 @@ class NowPlayingMovies extends StatelessWidget {
                       ),
                   ],
                 ),
-                ),
+                ):Container(),
               );
             }),
             )],

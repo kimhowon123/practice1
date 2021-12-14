@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:practice1/nowplaying_movies.dart';
 import 'package:practice1/popular_movies.dart';
 import 'package:practice1/toprated_movies.dart';
@@ -31,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List toprated_movies = [];
   List popular_movies = [];
   List upcoming_movies = [];
+  List a =[];
   String api = '4997aa3d5b054b5704cca6ea91622e6c';
   String accesstoken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTk3YWEzZDViMDU0YjU3MDRjY2E2ZWE5MTYyMmU2YyIsInN1YiI6IjYxYjgxNDE3ZDE0NDQzMDA5MmNkMDAyNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ug8zyQ-OR9NbxinX1rYYfnjiniK9RXODeCuZdHOdo4o';
   
@@ -43,10 +45,10 @@ void initState() {
   loadmovies()async{
     TMDB tmdbWithCustomLogs = TMDB(ApiKeys(api, accesstoken),
     logConfig: ConfigLogger(showErrorLogs: true, showLogs: true));
-    Map popularresult = await tmdbWithCustomLogs.v3.movies.getPouplar();
-    Map topratedresult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-    Map upcomingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
-    Map nowplayingresult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
+    Map popularresult = await tmdbWithCustomLogs.v3.movies.getPouplar(language: 'ko-KR');
+    Map topratedresult = await tmdbWithCustomLogs.v3.movies.getTopRated(language: 'ko-KR');
+    Map upcomingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming(language: 'ko-KR');
+    Map nowplayingresult = await tmdbWithCustomLogs.v3.movies.getNowPlaying(language: 'ko-KR');
 
   setState(() {
     nowplaying_movies = nowplayingresult['results'];
