@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:practice1/showing.dart';
+import 'package:practice1/nowplaying_movies.dart';
+import 'package:practice1/popular_movies.dart';
+import 'package:practice1/toprated_movies.dart';
+import 'package:practice1/upcoming_movies.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 void main() {
@@ -10,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'movies',
       home: MyHomePage(),
     );
   }
@@ -35,18 +38,16 @@ class _MyHomePageState extends State<MyHomePage> {
 void initState() {
   loadmovies();
   super.initState();
-  
 }
 
   loadmovies()async{
     TMDB tmdbWithCustomLogs = TMDB(ApiKeys(api, accesstoken),
     logConfig: ConfigLogger(showErrorLogs: true, showLogs: true));
-  Map popularresult = await tmdbWithCustomLogs.v3.movies.getPouplar();
-  Map topratedresult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-  Map upcomingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
-  Map nowplayingresult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
+    Map popularresult = await tmdbWithCustomLogs.v3.movies.getPouplar();
+    Map topratedresult = await tmdbWithCustomLogs.v3.movies.getTopRated();
+    Map upcomingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
+    Map nowplayingresult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
 
-  
   setState(() {
     nowplaying_movies = nowplayingresult['results'];
     toprated_movies = topratedresult['results'];
@@ -61,7 +62,18 @@ void initState() {
     return Scaffold(
       body: ListView(
         children: [
-          NowPlayingMovies(nowplaying:nowplaying_movies)],
+          NowPlayingMovies(nowplaying:nowplaying_movies),
+          UpcomingMovies(upcoming:upcoming_movies),
+          PopularMovies(popular: popular_movies),
+          TopratedMovies(toprated: toprated_movies),
+          ListTile(
+            title: Row(children: [
+              SizedBox(
+                width: 100,
+              )
+            ],),
+          )
+          ],
           ),
     );
   }
