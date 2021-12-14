@@ -24,9 +24,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List trendingmovies = [];
-  List topratedmovies = [];
-  List tv = [];
+  List nowplaying_movies = [];
+  List toprated_movies = [];
+  List popular_movies = [];
+  List upcoming_movies = [];
   String api = '4997aa3d5b054b5704cca6ea91622e6c';
   String accesstoken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTk3YWEzZDViMDU0YjU3MDRjY2E2ZWE5MTYyMmU2YyIsInN1YiI6IjYxYjgxNDE3ZDE0NDQzMDA5MmNkMDAyNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ug8zyQ-OR9NbxinX1rYYfnjiniK9RXODeCuZdHOdo4o';
   
@@ -40,16 +41,19 @@ void initState() {
   loadmovies()async{
     TMDB tmdbWithCustomLogs = TMDB(ApiKeys(api, accesstoken),
     logConfig: ConfigLogger(showErrorLogs: true, showLogs: true));
-  Map trendingresult = await tmdbWithCustomLogs.v3.trending.getTrending();
+  Map popularresult = await tmdbWithCustomLogs.v3.movies.getPouplar();
   Map topratedresult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-  Map tvresult = await tmdbWithCustomLogs.v3.tv.getPouplar();
+  Map upcomingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
+  Map nowplayingresult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
+
   
   setState(() {
-    trendingmovies = trendingresult['results'];
-    topratedmovies = topratedresult['results'];
-    tv = tvresult['results'];
+    nowplaying_movies = nowplayingresult['results'];
+    toprated_movies = topratedresult['results'];
+    popular_movies = popularresult['results'];
+    upcoming_movies = upcomingresult['results'];
   });
-  print(trendingmovies);
+  print(nowplaying_movies);
   }
 
   @override
@@ -57,9 +61,8 @@ void initState() {
     return Scaffold(
       body: ListView(
         children: [
-          TrendingMovies(trending:trendingmovies)],
+          NowPlayingMovies(nowplaying:nowplaying_movies)],
           ),
-      
     );
   }
 }

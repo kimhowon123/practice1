@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class TrendingMovies extends StatelessWidget {
-  final List trending;
+class NowPlayingMovies extends StatelessWidget {
+  final List nowplaying;
 
-  const TrendingMovies({Key? key, required this.trending}) : super(key: key);
+  const NowPlayingMovies({Key? key, required this.nowplaying}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class TrendingMovies extends StatelessWidget {
         children: [
           Text('현재 상영중',style: TextStyle(fontSize:24, fontWeight: FontWeight.bold,),),
           Container(height: 270,
-          child: ListView.builder(itemCount: trending.length,
+          child: ListView.builder(itemCount: nowplaying.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return InkWell(
@@ -30,14 +30,14 @@ class TrendingMovies extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                         image: NetworkImage(
-                        'https://image.tmdb.org/t/p/w500'+trending[index]['poster_path']
+                        'https://image.tmdb.org/t/p/w500'+nowplaying[index]['poster_path']
                       )
                       )
                       ),
                     ),
                     Container(child: Text(
-                      trending[index]['title']!=null?
-                      trending[index]['title']:'Loading'),)
+                      nowplaying[index]['title']!=null?
+                      nowplaying[index]['title']:'Loading'),)
                   ],
                 ),
                 ),
